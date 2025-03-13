@@ -6,7 +6,7 @@ using MultiShop.Catalog.Settings;
 
 namespace MultiShop.Catalog.Services.ProductImageService
 {
-    public class ProductImageService
+    public class ProductImageService:IProductImageService
     {
 
         private readonly IMongoCollection<ProductImage> _productImage;
@@ -28,7 +28,9 @@ namespace MultiShop.Catalog.Services.ProductImageService
         {
             await _productImage.DeleteOneAsync(x => x.PublicImagesID == id);
         }
-        public async Task<List<ResultProductImageDto>> GetAllProductImageAsync()
+
+     
+        public async Task<List<ResultProductImageDto>> GellAllProductImageAsync()
         {
             var values = await _productImage.Find(x => true).ToListAsync();
             return _mapper.Map<List<ResultProductImageDto>>(values);
@@ -39,10 +41,12 @@ namespace MultiShop.Catalog.Services.ProductImageService
             return _mapper.Map<GetByIdProductImageDto>(values);
 
         }
-        public async Task UpdateProductImageAsync(string id, UpdateProductImageDto updateProductImageDto)
+        public async Task UpdateProductImageAsync(UpdateProductImageDto updateProductImageDto)
         {
             var value = _mapper.Map<ProductImage>(updateProductImageDto);
-            await _productImage.ReplaceOneAsync(x => x.PublicImagesID == id, value);
+            await _productImage.ReplaceOneAsync(x => x.PublicImagesID == updateProductImageDto.PublicImagesID,value);
         }
+
+      
     }
     }
