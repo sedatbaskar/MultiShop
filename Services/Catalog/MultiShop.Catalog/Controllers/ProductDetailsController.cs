@@ -7,11 +7,11 @@ namespace MultiShop.Catalog.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PorductDetailsController : ControllerBase
+    public class ProductDetailsController : ControllerBase
     {
         private readonly IProductDetailsService _productDetailsService;
 
-        public PorductDetailsController(IProductDetailsService productDetailsService)
+        public ProductDetailsController(IProductDetailsService productDetailsService)
         {
             _productDetailsService = productDetailsService;
         }
@@ -24,7 +24,7 @@ namespace MultiShop.Catalog.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductDetailById(string id)
         {
-            var value = _productDetailsService.GetByIdProductDetailAsync(id);
+            var value = await _productDetailsService.GetByIdProductDetailAsync(id);
             return Ok(value);
         }
         [HttpPost]
