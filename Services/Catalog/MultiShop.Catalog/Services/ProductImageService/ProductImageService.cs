@@ -1,70 +1,48 @@
 ﻿using AutoMapper;
 using MongoDB.Driver;
-using MultiShop.Catalog.Dtos.ProductImageDetails; // DTO'lar ProductImage içindir
-using MultiShop.Catalog.Entities;              // Entity: ProductImage
-using MultiShop.Catalog.Settings;              // Veritabanı ayarları
+using MultiShop.Catalog.Dtos.ProductImageDto; 
+using MultiShop.Catalog.Entities;              
+using MultiShop.Catalog.Settings;
 
 namespace MultiShop.Catalog.Services.ProductImageService
 {
-    public class ProductImageService : IProductImageService
+    public class ProductImageService
     {
-        private readonly IMongoCollection<ProductImage> _productImageCollection;  // Koleksiyon ismi doğru tanımlandı
+
+        private readonly IMongoCollection<ProductImage> _productImage;
         private readonly IMapper _mapper;
-
-        public ProductImageService(IMapper mapper, IDatabaseSettings databaseSettings)
+        public ProductImageService(IMapper mapper, IDatabaseSettings _databaseSettings)
         {
-            // MongoDB bağlantısı kur
-            var client = new MongoClient(databaseSettings.ConnectionString);
-            var database = client.GetDatabase(databaseSettings.DatabaseName);
-
-            // ProductImage koleksiyonunu al
-            _productImageCollection = database.GetCollection<ProductImage>(databaseSettings.ProductImageCollectionName);
-
-            // AutoMapper bağlantısı
+            var client = new MongoClient(_databaseSettings.ConnectionString);
+            var database = client.GetDatabase(_databaseSettings.DatabaseName);
+            _productImage = database.GetCollection<ProductImage>(_databaseSettings.ProductImageCollectionName);
             _mapper = mapper;
         }
-
-        // ✅ Yeni ürün görseli ekleme
-        public async Task CreateProductImageAsync(CreateProductmageDetailDto createProductImageDto)
+        public async Task CreateProductImageAsync(CreateProductImageDto createProductImageDto)
         {
-            var productImageEntity = _mapper.Map<ProductImage>(createProductImageDto);
-
-            await _productImageCollection.InsertOneAsync(productImageEntity);
+            var value = _mapper.Map<ProductImage>(createProductImageDto);
+            await _productImage.InsertOneAsync(value);
         }
 
-        // ✅ ID'ye göre ürün görseli silme
         public async Task DeleteProductImageAsync(string id)
         {
-            await _productImageCollection.DeleteOneAsync(pi => pi.PublicImagesID == id);
+            await _productImage.DeleteOneAsync(x => x.PublicImagesID == id);
         }
-
-        public async Task<List<ResultProductmageDetailDto>> GellAllProductDto()
+        public async Task<List<ResultProductImageDto>> GetAllProductImageAsync()
         {
-            var productImages = await _productImageCollection.Find(pi => true).ToListAsync();
-
-            return _mapper.Map<List<ResultProductmageDetailDto>>(productImages);
+            var values = await _productImage.Find(x => true).ToListAsync();
+            return _mapper.Map<List<ResultProductImageDto>>(values);
         }
-
-
-        // ✅ ID'ye göre ürün görselini getirme
-        public async Task<GetByIdProductmageDetailDto> GetByIdProductImageAsync(string id)
+        public async Task<GetByIdProductImageDto> GetByIdProductImageAsync(string id)
         {
-            var productImage = await _productImageCollection
-                .Find(pi => pi.PublicImagesID == id)
-                .FirstOrDefaultAsync();
+            var values = await _productImage.Find(x => x.PublicImagesID == id).FirstOrDefaultAsync();
+            return _mapper.Map<GetByIdProductImageDto>(values);
 
-            return _mapper.Map<GetByIdProductmageDetailDto>(productImage);
         }
-
-        // ✅ Ürün görselini güncelleme
-        public async Task UpdateProductImageAsync(UpdateProductmageDetailDto updateProductImageDto)
+        public async Task UpdateProductImageAsync(string id, UpdateProductImageDto updateProductImageDto)
         {
-            var updatedProductImage = _mapper.Map<ProductImage>(updateProductImageDto);
-
-            await _productImageCollection.FindOneAndReplaceAsync(
-                pi => pi.PublicImagesID == updateProductImageDto.PublicImagesID,
-                updatedProductImage
-            );
+            var value = _mapper.Map<ProductImage>(updateProductImageDto);
+            await _productImage.ReplaceOneAsync(x => x.PublicImagesID == id, value);
         }
     }
-}
+    }

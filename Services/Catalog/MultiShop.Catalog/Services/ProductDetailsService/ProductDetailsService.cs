@@ -33,7 +33,7 @@ namespace MultiShop.Catalog.Services.ProductDetailsService
         }
 
         // ✅ Tüm Ürün Detaylarını Getir
-        public async Task<List<ResultProductDetailsDto>> GellAllProductDetailasync()
+        public async Task<List<ResultProductDetailsDto>> GellAllProductDetailAsync()
         {
             var details = await _productDetailsCollection.Find(x => true).ToListAsync();
             return _mapper.Map<List<ResultProductDetailsDto>>(details);

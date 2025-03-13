@@ -2,7 +2,7 @@
 using MultiShop.Catalog.Dtos.CategoryDtos;
 using MultiShop.Catalog.Dtos.ProductDetailsDtos;
 using MultiShop.Catalog.Dtos.ProductDtos;
-using MultiShop.Catalog.Dtos.ProductImageDetails;
+using MultiShop.Catalog.Dtos.ProductImageDto;
 using MultiShop.Catalog.Entities;
 
 namespace MultiShop.Catalog.Mapping
@@ -26,10 +26,10 @@ namespace MultiShop.Catalog.Mapping
             CreateMap<ProductDetail, UpdateProductDetailDto>().ReverseMap();
             CreateMap<ProductDetail, GetByIdProductDetailDto>().ReverseMap();
 
-            CreateMap<ProductImage, ResultProductmageDetailDto>().ReverseMap();
-            CreateMap<ProductImage, CreateProductmageDetailDto>().ReverseMap();
-            CreateMap<ProductImage, UpdateProductmageDetailDto>().ReverseMap();
-            CreateMap<ProductImage, GetByIdProductmageDetailDto>().ReverseMap();
+            CreateMap<ProductImage, ResultProductImageDto>().ReverseMap();
+            CreateMap<ProductImage, CreateProductImageDto>().ReverseMap();
+            CreateMap<ProductImage, UpdateProductImageDto>().ReverseMap();
+            CreateMap<ProductImage, GetByIdProductImageDto>().ReverseMap();
 
 
         }
