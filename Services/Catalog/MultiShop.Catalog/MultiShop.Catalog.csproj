@@ -15,8 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Services\ProductImageService\" />
-    <Folder Include="Services\ProductDetailsService\" />
   </ItemGroup>
 
 </Project>
