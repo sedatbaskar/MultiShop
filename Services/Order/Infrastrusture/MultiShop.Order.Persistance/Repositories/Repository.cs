@@ -1,4 +1,5 @@
-﻿using MultiShop.Order.Application.Features.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using MultiShop.Order.Application.Features.Interfaces;
 using MultiShop.Order.Persistance.Context;
 using System;
 using System.Collections.Generic;
@@ -18,34 +19,38 @@ namespace MultiShop.Order.Persistance.Repositories
             _context = orderContext;
         }
 
-        //public Task<T> CreateAsync(T entity)
-        //{
-        //    _context.Set<T>().
-        //}
-
-        public Task<T> DeleteAsync(T entity)
+        public async Task CreateAsync(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Add(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<List<T>> GetAllAsync()
+        public async Task DeleteAsync(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Remove(entity);
+            await _context.SaveChangesAsync();
+
         }
 
-        public Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter)
+        public async Task<List<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().ToListAsync();
         }
 
-        public Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().SingleOrDefaultAsync(filter);
         }
 
-        public Task<T> UpdateAsync(T entity)
+        public async Task<T> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().FindAsync(id);
+        }
+
+        public async Task UpdateAsync(T entity)
+        {
+            _context.Set<T>().Update(entity);
+            await _context.SaveChangesAsync();
         }
     }
 }
