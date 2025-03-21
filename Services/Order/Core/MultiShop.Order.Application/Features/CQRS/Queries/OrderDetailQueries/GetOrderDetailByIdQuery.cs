@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiShop.Order.Application.Features.CQRS.Queries.AddressQueries
+namespace MultiShop.Order.Application.Features.CQRS.Queries.OrderDetailQueries
 {
-    public class RemoveAddressCommands
+    public class GetOrderDetailByIdQuery
     {
         public int Id { get; set; }
-        public RemoveAddressCommands(int id)
+
+        public GetOrderDetailByIdQuery(int id)
         {
             Id = id;
         }
-
-       
     }
 }

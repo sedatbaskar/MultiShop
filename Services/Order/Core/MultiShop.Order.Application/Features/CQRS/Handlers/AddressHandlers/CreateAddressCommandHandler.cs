@@ -1,4 +1,5 @@
-﻿using MultiShop.Order.Application.Features.CQRS.Queries.AddressQueries;
+﻿using MultiShop.Order.Application.Features.CQRS.Commands.AddressCommands;
+using MultiShop.Order.Application.Features.CQRS.Queries.AddressQueries;
 using MultiShop.Order.Application.Features.Interfaces;
 using MultiShop.Order.Domain.Entities;
 using System;
@@ -27,7 +28,7 @@ namespace MultiShop.Order.Application.Features.CQRS.Handlers.AddressHandlers
         {
             _repository = repository;
         }
-        public async Task Handle(CreateAddressCommands createAddressCommands)
+        public async Task Handle(CreateAddressComand createAddressCommands)
         {
             await _repository.CreateAsync(new Address
             {
