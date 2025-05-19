@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Order.Application.Features.CQRS.Commands.AddressCommands;
+using MultiShop.Order.Application.Features.CQRS.Commands.OrderDetailCommands;
 using MultiShop.Order.Application.Features.CQRS.Handlers.AddressHandlers;
+using MultiShop.Order.Application.Features.CQRS.Handlers.OrderDetailHandlers;
 using MultiShop.Order.Application.Features.CQRS.Queries.AddressQueries;
 
 namespace MultiShop.Order.WebApi.Controllers
@@ -54,6 +56,8 @@ namespace MultiShop.Order.WebApi.Controllers
             await _updateAddressCommandHandler.Handle(comand);
             return Ok("Adres bilgisi başarıyla güncellendi");
         }
+
+        
 
         [HttpDelete]
         public async Task<IActionResult> RemoveAddress(int id)

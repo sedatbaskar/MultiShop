@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Order.Persistance
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Order.WebApi", "Services\Order\Presentation\MultiShop.Order.WebApi\MultiShop.Order.WebApi.csproj", "{B77055F9-B7CC-4AE0-9B0A-6909932D0B79}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityServer", "{C38E5264-99E3-4B4D-9A33-D28D3BAA6D4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{AF5BEFDA-28AE-7603-040D-593562AC6BD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,10 @@ Global
 		{B77055F9-B7CC-4AE0-9B0A-6909932D0B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B77055F9-B7CC-4AE0-9B0A-6909932D0B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B77055F9-B7CC-4AE0-9B0A-6909932D0B79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF5BEFDA-28AE-7603-040D-593562AC6BD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF5BEFDA-28AE-7603-040D-593562AC6BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF5BEFDA-28AE-7603-040D-593562AC6BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF5BEFDA-28AE-7603-040D-593562AC6BD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +84,7 @@ Global
 		{2263C83D-72D0-448F-A34E-0CC465CEE961} = {B58A5AEB-5C90-46E5-9956-9467A8127EB5}
 		{D8AEB44C-8DD3-40F1-A3BD-36F69C8CEAF5} = {E09FED24-4F4F-4F10-9D6C-4BF1B65F1D78}
 		{B77055F9-B7CC-4AE0-9B0A-6909932D0B79} = {BA30E879-6BB3-4F61-8EEB-E7C0CC8375ED}
+		{AF5BEFDA-28AE-7603-040D-593562AC6BD5} = {C38E5264-99E3-4B4D-9A33-D28D3BAA6D4C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE89C708-3439-4825-8DBD-6FC0A92518F0}
