@@ -1,4 +1,5 @@
-﻿using IdentityServer4.Models;
+﻿using IdentityServer4;
+using IdentityServer4.Models;
 using System.Collections.Generic;
 
 namespace IdentityServer
@@ -39,8 +40,34 @@ namespace IdentityServer
                 AllowedGrantTypes= GrantTypes.ClientCredentials,
                 ClientSecrets= {new Secret("multishopsecret".Sha256()) },
                 AllowedScopes = { "CatalogReadPermission" },
+            },
+
+            //Manager
+
+            new Client
+            {
+                ClientId = "MultiShopManagerId",
+                ClientName = "Multi Shop Manager User",
+                AllowedGrantTypes= GrantTypes.ClientCredentials,
+                ClientSecrets= {new Secret("multishopsecret".Sha256()) },
+                AllowedScopes = { "CatalogFullPermission", "CatalogFullPermission"}
             }
 
+            //Admin
+            ,new Client
+            {
+                ClientId = "MultiShopAdminId",
+                ClientName = "Multi Shop Admin User",
+                AllowedGrantTypes= GrantTypes.ClientCredentials,
+                ClientSecrets= {new Secret("multishopsecret".Sha256()) },
+                AllowedScopes = { "CatalogFullPermission", "CatalogFullPermission", "DiscountFullPermission", "OrderFullPermission",
+                IdentityServerConstants.LocalApi.ScopeName,
+                IdentityServerConstants.StandardScopes.Email,
+                IdentityServerConstants.StandardScopes.OpenId,
+                IdentityServerConstants.StandardScopes.Profile,
+                },
+                AccessTokenLifetime = 600
+            }
         };
     }
 }
