@@ -26,5 +26,21 @@ namespace IdentityServer
             new ApiScope("DiscountFullPermission", "Full authority for discount operations"),
             new ApiScope("OrderFullPermission", "Full authority for order operations")
         };
+
+        public static IEnumerable<Client> Clients => new Client[]
+        {
+            //Visitor
+
+            new Client
+            {
+
+                ClientId = "MultiShopVisitor",
+                ClientName = "Multi Shop Visitor User",
+                AllowedGrantTypes= GrantTypes.ClientCredentials,
+                ClientSecrets= {new Secret("multishopsecret".Sha256()) },
+                AllowedScopes = { "CatalogReadPermission" },
+            }
+
+        };
     }
 }
